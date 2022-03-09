@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    
+<div>
+    {% if searchitem %}
+            {% for i in products %}
+                <div>
+                    You have searched for:{{ i.name }} <br><br>
+                    Product Description:{{ i.desc }}<br><br>
+                    Price:{{ i.price }}<br><br>
+                    Stock Availability:{{ i.stock }}<br><br>
+                    <a href="/product/{{ i.slug }}"><img src="{{ i.img.url }}" alt="" style="width: 10cm; height:7cm"><br><br></a>
+                </div><br><br>
+
+                {% empty %}
+                <div>
+                    <br><br><center><h3>No results found my darling..</h3></center>
+                </div>
+            {% endfor %}
+                    
+    {% else %}
+        <div>
+            <br><br><center><h3>Hey.. You forgot to type something in a Search bar..Dude</h3></center>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

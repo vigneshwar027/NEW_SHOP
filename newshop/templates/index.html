@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    
+    <div>
+            {% if catitem %}
+                <center><h1> Welcome to our Shopeasy <br>the below are the various categories</h1></center>
+                {% for i in cat %}
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ i.img.url }}" alt="Card image cap">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ i.name }}</h5>
+                        <p class="card-text">{{ i.desc }}</p>
+                        <a href="/{{ i.slug }}" class="btn btn-primary">View Product</a>
+                        </div>
+                    </div>                    
+                {% endfor %}    
+            {% elif proditem %} 
+                <div>
+                    <img src="{{c_name.img.url}}" alt="" style="width: 100%; height:7cm;margin-top:2cm">
+                </div>    
+                <h1> Welcome to the {{c_name}} section  </h1>
+                {% for i in cat %}
+                    <div>
+                        Product name:{{ i.name }} <br><br>
+                        Product Description:{{ i.desc }}<br><br>
+                        Price:{{ i.price }}<br><br>
+                        Stock Availability:{{ i.stock }}<br><br>
+                        <a href="/product/{{ i.slug }}"><img src="{{ i.img.url }}" alt="" style="width: 10cm; height:7cm"><br><br></a>
+                    </div><br><br>
+                {% endfor %}    
+            {% elif proddesc %}     
+                <h1> Welcome to the {{proddesc.name}} section  </h1>            
+                <div>
+                    Product name:{{ proddesc.name }} <br><br>
+                    Product Description:{{ proddesc.desc }}<br><br>
+                    Price:{{ proddesc.price }}<br><br>
+                    Stock Availability:{{ proddesc.stock }}<br><br>
+                    <a href="{% url 'productpage' %} {{ i.slug }} "><img src="{{ i.img.url }}" alt="" style="width: 10cm; height:7cm"><br><br></a>
+                </div><br><br>
+    
+            {% endif %}    
+
+
+{{cat}} <br><br>
+{% if cat.has_previous %}   
+
+    <a href="?page=1">&laquo First page</a>
+
+    <a href="?page={{cat.previous_page_number}}">Previous page</a>
+
+
+{% endif %}
+
+Current Page: {{cat.number}}
+{% if cat.has_next %}
+    <a href="?page={{cat.next_page_number}}">Next page &raquo</a>
+    <a href="?page={{cat.paginator.num_pages}}">Last page</a>
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<body>
+  <h1>{{ product.name }}</h1>
+  <hr>
+
+
+<img src="{{ product.img.url }}" alt="" style="width:auto;height:10cm"><hr>
+Item details:{{ product.desc }}<br><br><hr>
+Price: {{ product.price }}<br><br><hr>
+
+{% if product.stock < 1 %}
+
+    <strong>Out of Stock </strong>
+
+{% else %}
+
+    Available Stock:{{ product.stock }}
+    
+    <button data-product='{{product.id}}' data-action='add'
+    class='btn btn-outline-secondary add-btn update-cart'>
+    Add to cart 
+    </button>
+  {% for message in messages %}   
+  <h4>{{message}}</h4>
+  {% endfor %}   
+
+
+{% endif %}
+
+{% endblock %}
